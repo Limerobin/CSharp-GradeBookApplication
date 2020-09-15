@@ -16,9 +16,9 @@ namespace GradeBook.GradeBooks
         public GradeBookType Type { get; set; }
         public bool IsWeighted { get; set; }
 
-        public BaseGradeBook(string name, bool weighted)
+        public BaseGradeBook(string name, bool isWeighted)
         {
-            IsWeighted = weighted;
+            IsWeighted = isWeighted;
             Name = name;
             Students = new List<Student>();
         }
@@ -109,39 +109,32 @@ namespace GradeBook.GradeBooks
 
         public virtual double GetGPA(char letterGrade, StudentType studentType)
         {
-           if(IsWeighted && studentType == StudentType.Honors || studentType == StudentType.DualEnrolled)
-            {
+            var gpa = 0;
+         
             switch (letterGrade)
             {
                 case 'A':
-                    return 5;
+                    gpa = 4;
+                    break;
                 case 'B':
-                    return 4;
+                    gpa = 3;
+                    break;
                 case 'C':
-                    return 3;
+                    gpa = 2;
+                    break;
                 case 'D':
-                    return 2;
+                    gpa = 1;
+                    break;
                 case 'F':
-                    return 1;
+                    gpa = 0;
+                    break;
             }
-            return 0;
-        } else
+            if(IsWeighted && studentType == StudentType.Honors || studentType == StudentType.DualEnrolled)
             {
-                switch (letterGrade)
-                {
-                    case 'A':
-                        return 4;
-                    case 'B':
-                        return 3;
-                    case 'C':
-                        return 2;
-                    case 'D':
-                        return 1;
-                    case 'F':
-                        return 0;
-                }
-                return 0;
+                gpa++;
             }
+            return gpa;
+        } 
         }
 
 

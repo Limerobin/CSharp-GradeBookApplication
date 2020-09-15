@@ -135,7 +135,7 @@ namespace GradeBook.GradeBooks
             }
             return gpa;
         } 
-        }
+        
 
 
         public virtual void CalculateStatistics()
